@@ -1,9 +1,11 @@
+const db = require('../../data/db-config');
+
 function find() { // EXERCISE A
   /*
     1A- Study the SQL query below running it in SQLite Studio against `data/schemes.db3`.
-    What happens if we change from a LEFT join to an INNER join?
-
-      SELECT
+    What happens if we change from a LEFT join to an INNER join? 
+    
+    SELECT
           sc.*,
           count(st.step_id) as number_of_steps
       FROM schemes as sc
@@ -12,9 +14,18 @@ function find() { // EXERCISE A
       GROUP BY sc.scheme_id
       ORDER BY sc.scheme_id ASC;
 
+    **** When we change to an INNER Join we only get back the data that fully correlates to both tables. 
+    In this case we lose getting any number of steps for scheme_id 7 becuase it has no steps to correlate 
+    unlike the first 6.  
+    
     2A- When you have a grasp on the query go ahead and build it in Knex.
     Return from this function the resulting dataset.
   */
+ return db('schemes as sc')
+  .leftJoin('steps as st', 'sc.scheme_id', 'st.scheme_id')
+  .groupBy('sc.scheme_id')
+  .select('sc.*')
+  .count('st.step_id as number_of_steps')
 }
 
 function findById(scheme_id) { // EXERCISE B
