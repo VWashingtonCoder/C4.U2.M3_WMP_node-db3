@@ -105,6 +105,7 @@ router.post('/', validateScheme, (req, res, next) => {
 
   Schemes.add(scheme)
     .then(scheme => {
+      console.log(scheme)
       res.status(201).json(scheme)
     })
     .catch(next)
