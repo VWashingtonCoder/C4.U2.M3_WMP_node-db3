@@ -23,7 +23,7 @@ const validateScheme = (req, res, next) => {
 */
   const schemeName = req.body.scheme_name;
   if(typeof schemeName !== 'string' || !schemeName || schemeName.trim() === '' ){
-    res.status(404).json({ message: "invalid scheme_name" });
+    res.status(400).json({ message: "invalid scheme_name" });
     return;
   } else {
     next();
