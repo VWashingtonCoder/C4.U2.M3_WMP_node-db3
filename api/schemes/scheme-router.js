@@ -105,7 +105,6 @@ router.post('/', validateScheme, (req, res, next) => {
 
   Schemes.add(scheme)
     .then(scheme => {
-      console.log(scheme)
       res.status(201).json(scheme)
     })
     .catch(next)
@@ -136,6 +135,7 @@ router.post('/:scheme_id/steps', checkSchemeId, validateStep, (req, res, next) =
 
   Schemes.addStep(scheme_id, step)
     .then(allSteps => {
+      console.log(allSteps)
       res.status(201).json(allSteps)
     })
     .catch(next)
